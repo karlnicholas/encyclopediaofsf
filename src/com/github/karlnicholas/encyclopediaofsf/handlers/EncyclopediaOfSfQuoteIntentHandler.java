@@ -35,31 +35,6 @@ public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-
-    	/*		
-		SearchResult searchResult;
-		try {
-			searchResult = getQuote.getRandomQuote();
-		} catch (ParseException | IOException e) {
-			throw new SpeechletException(e);
-		}
-		if ( searchResult.preamble.isEmpty()) {
-			SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
-			outputSpeech.setSsml("<speak>There is a problem connecting to the Encyclopedia of Philosophy at this time."
-					+ " Please try again later.</speak>");
-			return SpeechletResponse.newTellResponse(outputSpeech);
-		}
-		log.info("Intent = GetQuote: " + searchResult.subject);
-		SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
-		outputSpeech.setSsml("<speak>Random entry for "+searchResult.subject+"<break strength=\"x-strong\"/>" + searchResult.preamble + "</speak>");
-		SimpleCard card = new SimpleCard();
-		card.setTitle("Encyclopedia of Philosophy");
-		card.setContent(searchResult.subject+"\n"+searchResult.url+"\n"+searchResult.preamble);
-		SpeechletResponse speechletResponse = SpeechletResponse.newTellResponse(outputSpeech);
-		speechletResponse.setCard(card);
-		return speechletResponse;
-*/    	
-//    	
     	String speechText;
 		SearchResult searchResult = null ;
 		try {
