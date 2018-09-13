@@ -1,0 +1,72 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "encyclopedia of science fiction",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "GetQuote",
+          "slots": [],
+          "samples": [
+            "tell me a quote",
+            "get me a quote",
+            "get a quote",
+            "quote",
+            "another quote",
+            "get another quote",
+            "random quote",
+            "find a quote",
+            "find another quote",
+            "anything",
+            "something",
+            "entry",
+            "random entry",
+            "tell me something",
+            "tell me something great"
+          ]
+        },
+        {
+          "name": "SearchIntent",
+          "slots": [
+            {
+              "name": "phrase",
+              "type": "LIST_OF_PHRASES"
+            }
+          ],
+          "samples": [
+            "search for {phrase}",
+            "about {phrase}",
+            "who is {phrase}",
+            "who was {phrase}",
+            "find {phrase}",
+            "find me {phrase}",
+            "look up {phrase}",
+            "look for {phrase}",
+            "search {phrase}",
+            "get {phrase}",
+            "get me {phrase}",
+            "tell me {phrase}",
+            "tell me about {phrase}",
+            "what was {phrase}",
+            "what is {phrase}"
+          ]
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ]
+    }
+  }
+}
