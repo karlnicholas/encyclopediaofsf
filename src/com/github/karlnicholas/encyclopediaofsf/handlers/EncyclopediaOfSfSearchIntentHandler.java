@@ -83,9 +83,9 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
 
         if ( good ) {
             return input.getResponseBuilder()
-                    .withSpeech(speechText + "<p>You can ask for another quote or say quit.</p>")
+                    .withSpeech(speechText + "<p>You can search again or ask for a quote.</p>")
                     .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + url + "\n" + speechText)
-                    .withReprompt("You can search for another entry or ask for a quote or quit.")
+                    .withReprompt("You can search for another entry or ask for a quote, or quit.")
                     .withShouldEndSession(false)
                     .build();
         } else {
