@@ -20,11 +20,11 @@ public class FallbackIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Sorry, I don't know that. You can say try saying help!";
-        String repromtText = "Would you like a quote?";
+        String speechText = "I didn't understand that. You can search for an entry or ask for a quote.";
+        String repromtText = "You can search, ask for a quote, or say try saying help.";
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("EncyclopediaOfSfSession", speechText)
+                .withShouldEndSession(false)
                 .withReprompt(repromtText)
                 .build();
     }

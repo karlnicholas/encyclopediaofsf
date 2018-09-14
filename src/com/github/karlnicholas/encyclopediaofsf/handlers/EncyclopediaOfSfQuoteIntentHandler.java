@@ -44,19 +44,19 @@ public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
 		}
 		if ( searchResult == null || searchResult.preamble.isEmpty()) {
 			speechText = "There is a problem connecting to the Encyclopedia of Science Fiction at this time."
-					+ " Please try again later.";
+					+ "Please try again later.";
+	        return input.getResponseBuilder()
+	                .withSpeech(speechText)
+	                .build();
 		} else {
-			speechText = "Random entry for "+searchResult.subject+". " + searchResult.preamble;
-			
+			speechText = "Random entry for "+searchResult.subject+".<p>" + searchResult.preamble + "</p>";
 		}
-        String repromptText =
-                "You can search for another phrase or a quote.";				
 
         return input.getResponseBuilder()
-                .withSpeech(speechText)
-                .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + searchResult.url + " " + speechText)
+                .withSpeech(speechText + "<p>You can ask for another quote or say quit.</p>")
+                .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + searchResult.url + "\n" + speechText)
+                .withReprompt("You can search for an entry, ask for a quote, or quit.")
                 .withShouldEndSession(false)
-                .withReprompt(repromptText)
                 .build();
     }
 }

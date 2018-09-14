@@ -30,12 +30,12 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Welcome to the Encyclopedia of Science Fiction. You can search for a word or a phrase or ask for a quote.";
-        String repromptText = "You can search for a word or a phrase or ask for a quote.";
+        String speechText = "Welcome to the Encyclopedia of Science Fiction. You can search for an entry or ask for a quote.";
+        String repromptText = "Welcome to the Encyclopedia of Science Fiction. You can search for an entry or ask for a quote.";
         return input.getResponseBuilder()
-                .withSimpleCard("EncyclopediaOfSfSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
+                .withShouldEndSession(false)
                 .build();
     }
 }

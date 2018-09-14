@@ -36,6 +36,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
     private static final String SLOT_SEARCH_PHRASE = "phrase";
     private SearchFiles searchFiles = new SearchFiles();
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("SearchIntent"));
@@ -68,33 +69,30 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
 			}
 			if ( searchResults != null && searchResults.size() > 0 ) {
 				// Create the plain text output				
-	            speechText = "Results for " + searchPhrase +". " + searchResults.get(0).preamble;
-	            good = true;
+	            speechText = "Results for " + searchPhrase +".<p>" + searchResults.get(0).preamble + "</p>";
 	            url = searchResults.get(0).url;
+	            good = true;
 			} else {
-	            speechText = "Sorry, nothing found for " + searchPhrase;
+	            speechText = "Sorry, nothing found for " + searchPhrase + ". You can search for another entry or ask for a quote.";
 			}
 
         } else {
             // Render an error since we don't know what the users favorite color is.
-            speechText = "I didn't understand that.";
+            speechText = "Sorry, I didn't understand that. You can search for another entry or ask for a quote.";
         }
-
-        String repromptText =
-                "You can search for another phrase or a quote.";				
 
         if ( good ) {
             return input.getResponseBuilder()
-                    .withSpeech(speechText)
-                    .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + url + " " + speechText)
+                    .withSpeech(speechText + "<p>You can ask for another quote or say quit.</p>")
+                    .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + url + "\n" + speechText)
+                    .withReprompt("You can search for another entry or ask for a quote or quit.")
                     .withShouldEndSession(false)
-                    .withReprompt(repromptText)
                     .build();
         } else {
 	        return input.getResponseBuilder()
 	                .withSpeech(speechText)
-	                .withShouldEndSession(false)
-	                .withReprompt(repromptText)
+                    .withReprompt("You can search for another entry or ask for a quote or quit.")
+                    .withShouldEndSession(false)
 	                .build();
         }
     }

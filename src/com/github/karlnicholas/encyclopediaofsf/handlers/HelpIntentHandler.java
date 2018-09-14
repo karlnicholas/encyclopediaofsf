@@ -29,10 +29,9 @@ public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "You can search for a word of a phrase or ask for a quote";
-        String repromptText = "Would you like a quote?";
+        String speechText = "You can search by saying search for something or you can say give me a quote.";
+        String repromptText = "You can search for something or ask for a quote.";
         return input.getResponseBuilder()
-                .withSimpleCard("EncyclopediaOfSfSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .withShouldEndSession(false)
