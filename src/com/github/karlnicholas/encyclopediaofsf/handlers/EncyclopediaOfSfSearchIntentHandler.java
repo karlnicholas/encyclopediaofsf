@@ -69,7 +69,7 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
 			}
 			if ( searchResults != null && searchResults.size() > 0 ) {
 				// Create the plain text output				
-	            speechText = "Results for " + searchPhrase +".<p>" + searchResults.get(0).preamble + "</p>";
+	            speechText = "Results for " + searchPhrase +". " + searchResults.get(0).preamble;
 	            url = searchResults.get(0).url;
 	            good = true;
 			} else {
@@ -85,13 +85,13 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
             return input.getResponseBuilder()
                     .withSpeech(speechText + "<p>You can search again or ask for a quote.</p>")
                     .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + url + "\n" + speechText)
-                    .withReprompt("You can search for another entry or ask for a quote, or quit.")
+                    .withReprompt("You can search for another entry or ask for a quote, or stop.")
                     .withShouldEndSession(false)
                     .build();
         } else {
 	        return input.getResponseBuilder()
 	                .withSpeech(speechText)
-                    .withReprompt("You can search for another entry or ask for a quote or quit.")
+                    .withReprompt("You can search for another entry or ask for a quote or stop.")
                     .withShouldEndSession(false)
 	                .build();
         }

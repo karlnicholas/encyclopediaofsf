@@ -49,13 +49,13 @@ public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
 	                .withSpeech(speechText)
 	                .build();
 		} else {
-			speechText = "Random entry for "+searchResult.subject+".<p>" + searchResult.preamble + "</p>";
+			speechText = "Random entry for "+searchResult.subject+". " + searchResult.preamble;
 		}
 
         return input.getResponseBuilder()
-                .withSpeech(speechText + "<p>You can ask for another quote or search for a specific entry.</p>")
+                .withSpeech(speechText + "<p>You can ask for another quote or do a search.</p>")
                 .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + searchResult.url + "\n" + speechText)
-                .withReprompt("You can search for an entry, ask for a quote, or quit.")
+                .withReprompt("You can search for an entry, ask for a quote, or stop.")
                 .withShouldEndSession(false)
                 .build();
     }
