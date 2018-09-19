@@ -23,9 +23,13 @@ import quote.GetQuote;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
+    private static final Logger logger = LogManager.getLogger(EncyclopediaOfSfQuoteIntentHandler.class);
     private GetQuote getQuote = new GetQuote();
 
     @Override
@@ -40,16 +44,18 @@ public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
 		try {
 			searchResult = getQuote.getRandomQuote();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		if ( searchResult == null || searchResult.preamble.isEmpty()) {
 			speechText = "There is a problem connecting to the Encyclopedia of Science Fiction at this time."
 					+ "Please try again later.";
+			logger.error("There is a problem connecting to the Encyclopedia of Science Fiction at this time.");
 	        return input.getResponseBuilder()
 	                .withSpeech(speechText)
 	                .build();
 		} else {
 			speechText = "Random entry for "+searchResult.subject+". " + searchResult.preamble;
+			logger.info("Random entry for "+searchResult.subject);
 		}
 
         return input.getResponseBuilder()
