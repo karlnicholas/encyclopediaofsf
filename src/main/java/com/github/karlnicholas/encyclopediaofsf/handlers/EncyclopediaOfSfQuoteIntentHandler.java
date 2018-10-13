@@ -55,7 +55,7 @@ public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
 	                .build();
 		} else {
 			speechText = "Random entry for "+searchResult.subject+". " + searchResult.preamble;
-			logger.info("Random entry for "+searchResult.subject);
+			logger.info("Random entry for "+searchResult.subject + "=" + searchResult.url);
 		}
 
         return input.getResponseBuilder()
