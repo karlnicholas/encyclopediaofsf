@@ -60,7 +60,7 @@ public class EncyclopediaOfSfQuoteIntentHandler implements RequestHandler {
 
         return input.getResponseBuilder()
                 .withSpeech(speechText + "<p>You can ask for another quote or do a search.</p>")
-                .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + searchResult.url + "\n" + speechText)
+                .withSimpleCard("Entry for " + searchResult.subject,  "http://www.sf-encyclopedia.com" + searchResult.url + "\n" + speechText)
                 .withReprompt("You can search for an entry, ask for a quote, or stop.")
                 .withShouldEndSession(false)
                 .build();

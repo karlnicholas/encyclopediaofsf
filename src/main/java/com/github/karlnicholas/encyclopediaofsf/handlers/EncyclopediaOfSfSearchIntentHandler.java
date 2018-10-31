@@ -57,7 +57,7 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
 
         String speechText;
         boolean good = false;
-        String url = null;
+        SearchResult searchResult = null;
 
         // Check for favorite color and create output to user.
         if (searchPhraseSlot != null) {
@@ -71,14 +71,14 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
 				logger.error(e);
 			}
 			if ( searchResults != null && searchResults.size() > 0 ) {
+				searchResult = searchResults.get(0);
 				// Create the plain text output				
-	            speechText = "Results for " + searchPhrase +". " + searchResults.get(0).preamble;
-	            url = searchResults.get(0).url;
+	            speechText = "Search found  " + searchResult.subject +". " + searchResult.preamble;
 	            good = true;
-	            logger.info("Results for " + searchPhrase);
+	            logger.info("Search found " + searchResult.subject + " for " + searchPhrase + ":" + searchResult.url);
 			} else {
 	            speechText = "Sorry, nothing found for " + searchPhrase + ". You can search for another entry or ask for a quote.";
-	            logger.info("Results for " + searchPhrase + "=" + searchResults.get(0).subject + ":" + searchResults.get(0).url);
+	            logger.info("Sorry, nothing found for " + searchPhrase);
 			}
 
         } else {
@@ -90,7 +90,7 @@ public class EncyclopediaOfSfSearchIntentHandler implements RequestHandler {
         if ( good ) {
             return input.getResponseBuilder()
                     .withSpeech(speechText + "<p>You can search again or ask for a quote.</p>")
-                    .withSimpleCard("Encyclopedia Of Science Fiction",  "http://www.sf-encyclopedia.com" + url + "\n" + speechText)
+                    .withSimpleCard("Search found " + searchResult.subject,  "http://www.sf-encyclopedia.com" + searchResult.url + "\n" + speechText)
                     .withReprompt("You can search for another entry or ask for a quote, or stop.")
                     .withShouldEndSession(false)
                     .build();
